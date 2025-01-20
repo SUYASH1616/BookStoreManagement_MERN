@@ -6,12 +6,16 @@ const app=express();
 const port=5000;
 const cors=require('cors');
 
+const path=require("path")
+
 // payment
 const Razorpay=require("razorpay");
 const crypto=require('crypto');
 require("dotenv").config();
 // to connect
 connectDb();
+
+const projectRoot = path.resolve();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
@@ -59,7 +63,14 @@ app.post("/validate", async (req, res) => {
 //     res.send("Hellow World");
 // })
 
-app
+
+app.use(express.static(path.join(projectRoot,'/frontend/dist')));
+
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(projectRoot,'frontend','dist','index.html'))
+})
+
+
 app.listen(port,()=>{
     console.log(`Server is Listening port ${port}`);
 })
