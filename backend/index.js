@@ -64,11 +64,12 @@ app.post("/validate", async (req, res) => {
 // })
 
 
-app.use(express.static(path.join(projectRoot,'/frontend/dist')));
+app.use(express.static(path.join(projectRoot, '../frontend/dist')));
 
-app.get('*',(req,res)=>{
-    res.sendFile(path.join(projectRoot,'frontend','dist','index.html'))
-})
+app.get('*', (req, res) => {
+    res.sendFile(path.join(projectRoot, '../frontend/dist/index.html'));
+});
+
 
 
 app.listen(port,()=>{
